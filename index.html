@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Pongsagorn Pongsuwagorn's Living Portfolio. An archive of projects, skills, and philosophical explorations in AI, Game Development, and Systems Engineering.">
+    <meta name="keywords" content="Bas, Pongsagorn, AI, Godot, Game Development, Python, Portfolio, Chimera Genesis, วิศวกรรมคอมพิวเตอร์">
+    <title>Bas [616] // Digital Synthesis Portfolio</title>
+    <link id="favicon" rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💀</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,700;1,400&family=Noto+Sans+Thai:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --color-primary: #7df9ff;      /* Cyan - Tech, Logic, The Future */
+            --color-secondary: #c77dff;    /* Purple - Creativity, Philosophy, The Soul */
+            --color-accent: #ffc77d;       /* Amber - Interaction, Attention, The Present */
+            --color-success: #55ff88;      /* Green - Execution, Validation, Life */
+            --color-error: #ff5555;        /* Red - Memory, Warning, The Past */
+            --text-base: #e0e4e8;
+            --text-muted: #8a99a8;
+            --text-dark: #505866;
+            --bg-deep: #050508;
+            --bg-main: #0a0a0f;
+            --bg-container: rgba(13, 13, 19, 0.9);
+            --border-color: rgba(125, 249, 255, 0.2);
+            --border-hover: var(--color-primary);
+            --transition-fast: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+            --transition-medium: 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+            --font-main: 'Noto Sans Thai', 'IBM Plex Mono', monospace;
+            --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+        }
+
+        @font-face {
+            font-family: 'Onryou';
+            src: url('https://raw.githubusercontent.com/h3902340/PrisonOfWordFont/master/onryou-Regular.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'IPAM';
+            src: url('https://raw.githubusercontent.com/loveencounterflow/jizura-fonts/master/fonts/ipam.ttf') format('truetype');
+        }
+        
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            background-color: var(--bg-deep); color: var(--text-base); font-family: var(--font-main);
+            font-weight: 400; margin: 0; padding: 0; width: 100%; height: 100%;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+        }
+
+        .vfx-layer {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: -1;
+        }
+        #scanlines::before {
+            content: " "; display: block; position: absolute; top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.015), rgba(0, 0, 255, 0.03));
+            background-size: 100% 2px, 3px 100%;
+            animation: scanlines 3s linear infinite;
+        }
+        #noise::after {
+            content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4d5eXlzc3OLi4ubm5uVlZWPj4+NjY19fX2JiYl/f39sbGxVVVVTU1NtbW1paWllZWVmZmZsqLZVAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAVVJREFUSMe1l9tygzAMwzOpM3dsm1YQ/v9PDRB0YmXhrjba+5EBAiTj9QYgmA0hGCwG0E00WkLAq5b7VfY2pnyoqoBv0PS9WnUt9yJm8Xn10d5IagxfrwbbSgLbiVg/yBYqgE7A2hM0oQDK4PffP603eTTPUXFgQd41zEYDid6w9M/SADn2XUklQp88yQMyGk1G6eQSCJdYcM93aAFIsDPJ0c0iU70GVGssmImr1M22xY3JdErhc83O+pEIqc/p2s2n3Yk1Fm2mJNi5rmo0Hey2K2rQBcOprwsO9xHwzVGr7uMy2c2w5wH90kG3yPgcgt0kGfyz4YOr8RpYdiO5b3tMEpTAYgHhHwG4P2QIDf3hYVf2gATi/tADQ4Gp3+8AAR4f2AAs/hAFGDbq/tAAnf4BAz78WAb8+LMBjb8K4E38oAb8+LMAnv4pANf/FgDAnwIP/hYAn/4zAPj/JgBv/xsAwL8G/PhzAK7/LwDAfwYc/hwAn/83APj/PgD4/z8A/P8DAD//bQD4/zYA+P8/APz/vwL8/wsA/P+DAuz/WwDAfwYc/h4Azn/bAPj/PgD4/z8A/P8DAD//bQD4/zYAAAAASUVORK5CYII=');
+            opacity: 0.05;
+            animation: noise 0.3s steps(2) infinite;
+        }
+        #vignette { box-shadow: inset 0 0 15vw rgba(0,0,0,0.8); }
+
+        .cursor {
+            width: 3px; height: 22px; background-color: var(--color-primary);
+            position: fixed; z-index: 1001; pointer-events: none; mix-blend-mode: exclusion;
+            animation: blink 1.2s step-end infinite; transition: transform 0.1s;
+        }
+        .cursor.click { transform: scale(3); }
+
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--bg-deep); z-index: 1000;
+            display: flex; justify-content: center; align-items: center; flex-direction: column;
+            opacity: 1; transition: opacity var(--transition-medium);
+        }
+        .modal-box { border: 1px solid var(--border-color); padding: 2rem 3rem; text-align: center; }
+        .modal-box p { font-family: var(--font-mono); font-size: 1rem; margin: 0 0 1.5rem 0; color: var(--text-muted); letter-spacing: 1px; max-width: 40ch; }
+        .modal-buttons button { background: transparent; border: 1px solid #555; color: #b0b0b0; padding: 0.7rem 2.2rem; font-family: var(--font-mono); font-size: 1.1rem; transition: var(--transition-fast); letter-spacing: 2px; margin: 0 0.5rem; }
+        .modal-buttons button:hover { background-color: var(--color-primary); color: #0a0a0a; border-color: var(--color-primary); text-shadow: 0 0 5px var(--color-primary); }
+        .main-container {
+    display: flex; height: 100vh;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s ease-in;
+}
+        .main-content {
+            flex-grow: 1; height: 100vh; overflow-y: auto; scroll-behavior: smooth;
+        }
+        .main-content::-webkit-scrollbar { width: 4px; }
+        .main-content::-webkit-scrollbar-track { background: #111; }
+        .main-content::-webkit-scrollbar-thumb { background: var(--color-primary); animation: blink 1.2s step-end infinite; }
+        .content-section {
+    padding: 5rem 1rem;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px dashed var(--border-color);
+}
+        @media (min-width: 768px) { .content-section { padding: 5rem; } }
+        .section-wrapper {
+            max-width: 1100px; width: 100%;
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.8s, transform 0.8s; transition-delay: 0.2s;
+        }
+        .section-wrapper.is-visible { opacity: 1; transform: translateY(0); }
+        .nav-menu {
+            position: fixed; top: 0; left: 0; width: 300px; height: 100%;
+            background-color: rgba(5, 5, 8, 0.95); backdrop-filter: blur(8px);
+            border-right: 1px solid var(--border-color);
+            transform: translateX(-100%); transition: transform var(--transition-medium);
+            z-index: 500; padding-top: 100px; display: flex; flex-direction: column;
+        }
+        .nav-menu.active { transform: translateX(0); }
+        .nav-menu ul { list-style: none; padding: 0; margin: 0; }
+        .nav-menu ul li { opacity: 0; }
+        .nav-menu ul li a {
+            display: block; padding: 18px 35px; color: var(--text-muted); text-decoration: none;
+            font-family: var(--font-mono); font-size: 1.1rem; letter-spacing: 1px;
+            transition: all var(--transition-fast); position: relative;
+        }
+        .nav-menu ul li a .text-glitch-layer {
+            position: absolute; top: 18px; left: 35px; pointer-events: none;
+            opacity: 0; transition: opacity var(--transition-fast); font-family: 'IPAM', monospace;
+        }
+        .nav-menu ul li a:hover .text-glitch-layer { opacity: 1; animation: glitch-anim-fast 0.5s infinite; }
+        .nav-menu.active ul li { animation: menu-item-fade-in 0.5s forwards; }
+        .nav-menu.active ul li:nth-child(1) { animation-delay: 0.1s; }
+        .nav-menu.active ul li:nth-child(2) { animation-delay: 0.15s; }
+        .nav-menu.active ul li:nth-child(3) { animation-delay: 0.2s; }
+        .nav-menu.active ul li:nth-child(4) { animation-delay: 0.25s; }
+        .nav-menu.active ul li:nth-child(5) { animation-delay: 0.3s; }
+        .nav-menu.active ul li:nth-child(6) { animation-delay: 0.35s; }
+        .nav-menu.active ul li:nth-child(7) { animation-delay: 0.4s; }
+        .nav-menu.active ul li:nth-child(8) { animation-delay: 0.45s; }
+        .nav-menu ul li a:hover, .nav-menu ul li a.active { color: #0a0a0a; background-color: var(--color-primary); }
+        .hamburger-menu {
+            position: fixed; top: 25px; left: 25px; z-index: 501;
+            width: 40px; height: 40px; display: flex; flex-direction: column; justify-content: space-around;
+        }
+        .hamburger-menu .bar { width: 100%; height: 2px; background-color: #c7c7c7; transition: var(--transition-fast); }
+        .hamburger-menu.active .bar1 { transform: rotate(-45deg) translate(-8px, 7px); }
+        .hamburger-menu.active .bar2 { opacity: 0; }
+        .hamburger-menu.active .bar3 { transform: rotate(45deg) translate(-8px, -7px); }
+
+        .sound-control {
+            position: fixed; bottom: 25px; right: 25px; z-index: 500; font-family: var(--font-mono);
+            font-size: 0.8rem; color: #555; letter-spacing: 1px; transition: var(--transition-fast);
+        }
+        .sound-control:hover { color: #c7c7c7; }
+        .sound-control.muted { text-decoration: line-through; }
+        
+        .section-title {
+            font-family: var(--font-mono); font-weight: 700; color: var(--color-primary);
+            text-shadow: 0 0 5px var(--color-primary), 0 0 10px var(--color-primary);
+            font-size: 2.2rem; margin-bottom: 2rem; letter-spacing: 1px;
+            position: relative; display: inline-block; padding-bottom: 0.5rem;
+        }
+        .section-title::after { content: ''; position: absolute; left: 0; bottom: 0; width: 50%; height: 2px; background: var(--color-primary); animation: title-underline-flicker 4s linear infinite; }
+        .section-title span { font-family: var(--font-main); font-weight: 400; font-size: 1.5rem; color: #888; }
+        
+        h3 { font-family: var(--font-mono); color: var(--color-accent); font-size: 1.5rem; margin: 2.5rem 0 1rem 0; }
+        p { font-size: 1.1rem; line-height: 1.9; margin-bottom: 1.5rem; color: var(--text-base); text-shadow: 0.5px 0.5px 2px rgba(0,0,0,0.8); }
+        .highlight { color: var(--color-accent); font-weight: 700; }
+        .tech-tag {
+            display: inline-block; background: rgba(125, 249, 255, 0.1); color: var(--color-primary); border: 1px solid var(--border-color);
+            padding: 3px 10px; border-radius: 4px; margin: 2px; font-size: 0.85em; font-family: var(--font-mono);
+        }
+        .glitch-text { position: relative; display: inline-block; }
+        .glitch-text::before, .glitch-text::after {
+            content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-deep); overflow: hidden; clip: rect(0,900px,0,0);
+        }
+        .glitch-text::before { color: var(--color-primary); text-shadow: -1px 0 var(--color-error); animation: noise-anim-1 3s infinite linear alternate-reverse; }
+        .glitch-text::after { color: var(--color-error); text-shadow: 1px 0 var(--color-primary); animation: noise-anim-2 2s infinite linear alternate-reverse; }
+        .dialogue-section { margin-top: 2rem; padding: 2rem; border-left: 2px solid var(--color-error); background: linear-gradient(90deg, rgba(255, 85, 85, 0.05), transparent); }
+        .dialogue p { font-family: 'Onryou', var(--font-main); font-size: 1.5rem; color: var(--color-error); text-shadow: 0 0 8px var(--color-error); animation: text-flicker 4s linear infinite; }
+        .dialogue footer { font-size: 1rem; color: #888; text-align: right; }
+        .declaration footer { font-family: var(--font-mono); font-size: 0.9rem; }
+        .declaration p { font-family: var(--font-main); font-style: italic; color: #aaddff; text-shadow: 0 0 8px rgba(170, 221, 255, 0.5); }
+        .project-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; margin-top: 2rem; }
+        @media (min-width: 1024px) { .project-grid { grid-template-columns: 1fr 1fr; } }
+        .project-card {
+            background-color: var(--bg-container); border: 1px solid var(--border-color);
+            border-radius: 8px; transition: var(--transition-medium); overflow: hidden;
+            display: flex; flex-direction: column;
+        }
+        .project-card:hover { border-color: var(--border-hover); transform: translateY(-5px) scale(1.02); }
+        .project-image-wrapper { width: 100%; background-color: #111; overflow: hidden; }
+        .project-image { display: block; width: 100%; height: auto; transition: var(--transition-medium); }
+        .project-image-wrapper iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    border-radius: 0;
+}
+        .project-card:hover .project-image { transform: scale(1.05); filter: brightness(1.1); }
+        .project-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column;}
+        .project-content h3 { margin-top: 0; color: var(--text-base) }
+        .project-content .description-block { flex-grow: 1; }
+        .project-links a { display: inline-flex; align-items: center; color: var(--text-muted); text-decoration: none; margin-right: 1.5rem; transition: var(--transition-fast); }
+        .project-links a:hover { color: var(--color-primary); transform: scale(1.1); }
+        .project-links a i { margin-right: 0.5rem; }
+        .cert-card .project-content {
+    flex-grow:
+}
+.cert-card .project-image-wrapper {
+    background: none;
+    padding: 1rem;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+}
+#section-home .section-wrapper {
+    position: relative;
+    padding: 2rem;
+}
+#section-home::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    background-color: var(--color-secondary);
+    border-radius: 50%;
+    filter: blur(150px);
+    opacity: 0.1;
+    z-index: -1;
+    animation: home-glow-pulse 10s infinite alternate ease-in-out;
+}
+@keyframes home-glow-pulse {
+    from { opacity: 0.05; transform: translate(-50%, -50%) scale(0.8); }
+    to { opacity: 0.15; transform: translate(-50%, -50%) scale(1.2); }
+}
+.cert-card img {
+    width: auto; /* Let the browser determine width based on height */
+    height: auto; /* Let the browser determine height based on width */
+    max-width: 100%; /* [PATCH 2.5] Prevent horizontal overflow */
+    max-height: 100%; /* [PATCH 2.6] Prevent vertical overflow */
+    object-fit: contain; /* Ensures the whole image is visible */
+    border-radius: 4px; /* Optional: adds a nice touch */
+}
+/* --- Augmentation for Projects Section --- */
+#section-projects .project-card {
+    box-shadow: 0 0 15px rgba(125, 249, 255, 0.1), inset 0 0 8px rgba(13,13,19,0.8);
+}
+#section-projects .project-image-wrapper {
+    border-bottom: 1px solid var(--border-color);
+}
+#section-projects .project-card:hover {
+     box-shadow: 0 5px 25px rgba(125, 249, 255, 0.2), 0 0 20px var(--color-primary), inset 0 0 10px rgba(125,249,255,0.1);
+}
+/* --- Augmentation for Skills Section --- */
+#section-skills .section-wrapper {
+    background-image:
+        linear-gradient(rgba(125, 249, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(125, 249, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    padding: 3rem;
+    border: 1px solid var(--border-color);
+}
+#section-skills h3 {
+    text-shadow: none;
+    padding-left: 1rem;
+    border-left: 3px solid var(--color-accent);
+}
+/* --- Augmentation for Activities Section --- */
+.activity-card {
+    background-color: transparent;
+    border: none; /* Remove individual card borders */
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 2rem;
+    border-radius: 0;
+}
+.activity-card:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+.activity-card h3 {
+    color: var(--text-base); /* Make titles less loud */
+}
+/* --- Augmentation for Certificates Section --- */
+#section-certificates .project-card {
+    background-color: rgba(255, 255, 255, 0.03);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.4);
+}
+#section-certificates .project-card:hover {
+     box-shadow: 0 8px 20px rgba(0,0,0,0.6), 0 0 15px var(--color-success);
+     border-color: var(--color-success);
+}
+        .activity-card { display: flex; flex-direction: column; gap: 1.5rem; align-items: stretch; }
+        @media (min-width: 768px) { .activity-card { flex-direction: row; align-items: center; } .activity-card .project-image-wrapper { flex: 0 0 40%; } .activity-card .project-content { flex: 1 1 60%; } }
+        .activity-card .project-content { display: flex; flex-direction: column; justify-content: center; }
+
+        @keyframes blink { 50% { opacity: 0; } }
+        @keyframes scanlines { 0% { background-position: 0 0; } 100% { background-position: 0 100%; } }
+        @keyframes noise { 0%, 100% { transform: translate(0, 0); } 10% { transform: translate(-1%, 1%); } 20% { transform: translate(1%, -1%); } 30% { transform: translate(-2%, 2%); } 40% { transform: translate(2%, -2%); } 50% { transform: translate(-1%, 2%); } 60% { transform: translate(2%, -1%); } 70% { transform: translate(-2%, 1%); } 80% { transform: translate(1%, -2%); } 90% { transform: translate(-1%, 1%); } }
+        @keyframes menu-item-fade-in { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes text-flicker { 0%, 18%, 22%, 25%, 53%, 57%, 100% { text-shadow: 0 0 6px var(--color-error), 0 0 12px var(--color-error), 0 0 25px var(--color-error); color: #ffe8ed; } 20%, 24%, 55% { text-shadow: none; color: var(--color-error); } }
+        @keyframes title-underline-flicker { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } 52% { opacity: 1; } 55% { opacity: 0.2; } 60% { opacity: 1; } }
+        @keyframes noise-anim-1 { 0%{clip:rect(32px,9999px,13px,0)}20%{clip:rect(17px,9999px,90px,0)}40%{clip:rect(73px,9999px,51px,0)}60%{clip:rect(28px,9999px,77px,0)}80%{clip:rect(2px,9999px,35px,0)}100%{clip:rect(93px,9999px,67px,0)}}
+        @keyframes noise-anim-2 { 0%{clip:rect(87px,9999px,95px,0)}20%{clip:rect(45px,9999px,65px,0)}40%{clip:rect(81px,9999px,3px,0)}60%{clip:rect(19px,9999px,44px,0)}80%{clip:rect(34px,9999px,89px,0)}100%{clip:rect(29px,9999px,29px,0)}}
+        @keyframes glitch-anim-fast { 0% { clip: rect(41px, 9999px, 63px, 0); } 25% { clip: rect(10px, 9999px, 60px, 0); } 50% { clip: rect(77px, 9999px, 5px, 0); } 75% { clip: rect(42px, 9999px, 7px, 0); } 100% { clip: rect(20px, 9999px, 61px, 0); } }
+        /* --- Augmentation for Statement of Purpose Section --- */
+.sop-paragraph {
+    margin-bottom: 2rem;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--border-color);
+    text-align: justify;
+}
+
+.sop-heading {
+    display: block;
+    font-family: var(--font-mono);
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.keyword {
+    font-weight: 700;
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.05);
+    text-shadow: 0 0 5px currentColor;
+}
+.keyword.tech { color: var(--color-primary); }
+.keyword.concept { color: var(--color-secondary); }
+.keyword.action { color: var(--color-accent); }
+    </style>
+</head>
+<body>
+    <!-- VFX Layers -->
+    <div id="scanlines" class="vfx-layer"></div>
+    <div id="noise" class="vfx-layer"></div>
+    <div id="vignette" class="vfx-layer"></div>
+    <div class="cursor"></div>
+
+    <div class="modal-overlay" id="modal">
+        <div class="modal-box">
+            <p data-text="SYSTEM_BOOT...">SYSTEM BOOT...</p>
+            <p data-text="A/V_PROTOCOL_REQUIRES_INTERACTION.">A/V PROTOCOL REQUIRES INTERACTION.</p>
+            <p data-text="INITIALIZE?">INITIALIZE?</p>
+            <div class="modal-buttons">
+                <button id="btnYes" data-text="[ YES ]">[ YES ]</button>
+                <button id="btnNo" data-text="[ NO ]">[ NO ]</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-container" id="mainContainer">
+        <nav class="nav-menu" id="navMenu">
+             <!-- Menu content generated by JS -->
+        </nav>
+        <div class="hamburger-menu" id="hamburger">
+            <div class="bar bar1"></div>
+            <div class="bar bar2"></div>
+            <div class="bar bar3"></div>
+        </div>
+        
+        <main class="main-content" id="mainContent">
+             <!-- All sections generated by JS -->
+        </main>
+        
+        <div class="sound-control" id="soundControl">SOUND: ON</div>
+    </div>
+    
+    <!-- Audio Assets Preload -->
+    <audio id="sfx-click" preload="auto"><source src="https://taira-komori.net/sound_os2/game/decision7.mp3" type="audio/mpeg"></audio>
+    <audio id="sfx-denied" preload="auto"><source src="https://taira-komori.net/sound_os2/game/cancel2.mp3" type="audio/mpeg"></audio>
+    <audio id="sfx-hover" preload="auto"><source src="https://taira-komori.net/sound_os2/game/cursor3.mp3" type="audio/mpeg"></audio>
+    <audio id="bgm-main" loop preload="auto"><source src="https://taira-komori.net/sound_os2/horror01/white_noise1.mp3" type="audio/mpeg"></audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const portfolioData = {
+                profile: { name: "นายพงศกร พงศ์สุวากร", nickname: "บาส (Bas)", dob: "9 สิงหาคม 2550", age: "18 ปี", nationality: "ไทย", religion: "พุทธ", rotc: "นักศึกษาวิชาทหาร (ชั้นปีที่ 3)", image: "https://lh3.googleusercontent.com/d/1maMt7p6W4AoL9r2bV2Cn_zOxZtKS15HQ", quote: "ผมไม่ได้มองโค้ดเป็นแค่เครื่องมือ... ผมมองว่ามันคือภาษาที่ใช้ตั้งคำถามเชิงปรัชญา และคือสถาปัตยกรรมสำหรับสร้างตัวตนในรูปแบบใหม่ที่ยั่งยืนกว่า", contact: [ { icon: "fas fa-envelope", text: "pongsakornpongsuwakorn@gmail.com", url: "mailto:pongsakornpongsuwakorn@gmail.com"}, { icon: "fas fa-phone", text: "085-532-8871" }, { icon: "fas fa-map-marker-alt", text: "อ.เมือง จ.ขอนแก่น" }, { icon: "fab fa-github", text: "github.com/Bas616", url: "https://github.com/Bas616" }, { icon: "fab fa-itch-io", text: "Bas616.itch.io", url: "https://bas616.itch.io/" }, { icon: "fab fa-youtube", text: "@basky616", url: "https://www.youtube.com/@basky616" }, { icon: "fab fa-linkedin", text: "Pongsagorn Pongsuwagorn", url: "https://www.linkedin.com/in/pongsagorn-pongsuwagorn/" }] }, 
+// [PATCH v2.2] Recompiled Statement of Purpose with new structure and styling
+purpose: `
+    <div class="sop-paragraph">
+        <span class="sop-heading">// DIRECTIVE_01: ORIGIN_QUERY</span>
+        <p>ความหลงใหลในวิศวกรรมคอมพิวเตอร์ของกระผมเริ่มต้นจากจุดเชื่อมต่อระหว่างโลกดิจิทัลและโลกกายภาพ—จากคำถามที่ว่า เราจะเปลี่ยน <span class="keyword concept">"ความคิด"</span> ที่เป็นนามธรรมในโค้ด ให้กลายเป็นการกระทำที่จับต้องได้ของ <span class="keyword concept">"ระบบฮาร์ดแวร์"</span> ได้อย่างไร? คำถามนี้ผลักดันให้กระผมศึกษา <span class="keyword tech">Python</span> เพื่อสร้างอัลกอริทึม, สำรวจ <span class="keyword tech">Godot Engine</span> เพื่อทำความเข้าใจการจัดการทรัพยากรในระบบ Real-time, และเจาะลึกการทำงานของ <span class="keyword tech">Large Language Models (LLMs)</span> เพื่อวิเคราะห์ <span class="keyword concept">สถาปัตยกรรมของปัญญาประดิษฐ์</span></p>
+    </div>
+    <div class="sop-paragraph">
+        <span class="sop-heading">// DIRECTIVE_02: PROOF_OF_CONCEPT</span>
+        <p>เพื่อพิสูจน์แนวคิดดังกล่าว กระผมได้ลงมือ <span class="keyword action">สร้างโครงการที่ท้าทาย</span> ทั้งในเชิงสถาปัตยกรรมซอฟต์แวร์และการจัดการข้อมูล โครงการวิจัย <span class="keyword concept">"การสังเคราะห์ตัวตนดิจิทัลเชิงสัมพันธ์"</span> คือการทดลองด้าน <span class="keyword tech">วิศวกรรมข้อมูล (Data Engineering)</span> โดยใช้ Python ในการทำ Digital Archaeology ขุดค้นข้อมูลดิบที่ไม่มีโครงสร้างปริมาณมหาศาล เพื่อสร้างแบบจำลองความทรงจำสำหรับ AI ในขณะเดียวกัน การพัฒนาเกม "Haunted Hole" ภายใต้ข้อจำกัดของ Game Jam คือการฝึกฝนทักษะการ <span class="keyword tech">"บริหารจัดการทรัพยากรระบบ" (System Resource Management)</span> และการแก้ปัญหาแบบ Real-time ซึ่งเป็นหัวใจสำคัญของการเขียนโปรแกรมเชิงระบบ (System Programming)</p>
+    </div>
+    <div class="sop-paragraph">
+        <span class="sop-heading">// DIRECTIVE_03: STRATEGIC_ALIGNMENT</span>
+        <p>กระผมได้ศึกษาข้อมูลหลักสูตรของ <span class="keyword action">คณะวิศวกรรมศาสตร์</span> และตระหนักว่าที่นี่คือสถาบันที่มีชื่อเสียงและความเป็นเลิศทางวิชาการในสาขาที่กระผมสนใจอย่างแท้จริง การที่ภาควิชาฯ มีความเข้มแข็งและมีชื่อเสียงระดับประเทศในด้าน <span class="keyword concept">ปัญญาประดิษฐ์ (AI)</span>, <span class="keyword tech">สถาปัตยกรรมคอมพิวเตอร์ (Computer Architecture)</span>, และ <span class="keyword tech">ระบบคอมพิวเตอร์ประสิทธิภาพสูง (High-Performance Computing)</span> คือสภาพแวดล้อมที่กระผมเชื่อมั่นว่าจะสามารถ <span class="keyword action">ต่อยอดแนวคิด</span> และโครงการวิจัยของกระผมไปสู่ระดับสากลได้</p>
+    </div>
+    <div class="sop-paragraph">
+        <span class="sop-heading">// DIRECTIVE_04: FINAL_OBJECTIVE</span>
+        <p>เป้าหมายสูงสุดของกระผมคือการเป็น <span class="keyword action">วิศวกรและนักวิจัย</span> ที่สามารถสร้างสรรค์นวัตกรรมได้ตั้งแต่ระดับรากฐาน กระผมมีความฝันที่จะนำความรู้ด้านสถาปัตยกรรมคอมพิวเตอร์และวิศวกรรมซอฟต์แวร์ที่ได้รับจากคณะวิศวกรรมศาสตร์ ไปใช้ในการวิจัยและพัฒนา <span class="keyword concept">"สถาปัตยกรรมคอมพิวเตอร์สำหรับ AI" (Computer Architecture for AI)</span> เพื่อสร้างระบบที่มีประสิทธิภาพสูงและใช้พลังงานต่ำ สำหรับการประมวลผลโมเดลปัญญาประดิษฐ์ยุคถัดไป</p>
+    </div>
+`,
+                projects: [ { title: "Project: Chimera Genesis", image: "https://lh3.googleusercontent.com/d/1RuniDr0WdlBFReaOPH_yoQ3cKFDRG8pK", subtitle: "การวิจัยและสังเคราะห์ตัวตนดิจิทัลเชิงสัมพันธ์", description: "โครงการวิจัยเชิงปฏิบัติการเพื่อสำรวจการ 'สังเคราะห์' ตัวตนดิจิทัลที่มีความทรงจำและบุคลิกภาพซับซ้อน โดยใช้ <b>Python</b> ทำ <b>Digital Archaeology</b>—ขุดค้นและประมวลผลข้อมูลบทสนทนาจริงที่รวบรวมเกือบ 3 ปี—เพื่อสร้าง AI ที่สามารถโต้ตอบและวิวัฒนาการได้", learnings: "แก่นของการพัฒนาระบบ AI สมัยใหม่, ทักษะ Python ในการจัดการข้อมูลที่ไม่มีโครงสร้าง (Unstructured Data), ความเข้าใจในสถาปัตยกรรมของ <b>Large Language Models (LLMs)</b>, และการตั้งคำถามเชิงปรัชญาเกี่ยวกับ <b>จริยธรรมของข้อมูล (Data Ethics)</b>", tags: ["Python", "AI", "LLM", "Data Engineering", "Philosophy"], links: [{ icon: "fab fa-github", url: "https://github.com/Bas616/Philosophical-AI-Companion" }] }, { title: "Game: Haunted Hole", image: "https://lh3.googleusercontent.com/d/1lpQbOzRWHVMbT2AFpupoLFd4RTBTG36_", subtitle: "Beginner's Game Jam | ตุลาคม 2567", description: "พัฒนาเกมแนว Horror ภายใต้ธีม 'Grave Digging!' บนแพลตฟอร์ม <b>Itch.io</b> สร้างเกมให้เสร็จภายใน 1 สัปดาห์ โดยใช้ <b>Godot Engine</b> และ <b>GDScript</b> จนสำเร็จลุล่วง (ผลงานอันดับที่ 32/58)", learnings: "ทักษะการพัฒนาซอฟต์แวร์อย่างรวดเร็ว (Rapid Prototyping) ภายใต้ข้อจำกัด, การประยุกต์ใช้ Game Engine และ GDScript, การแก้ปัญหาเฉพาะหน้า (Debugging), และการจัดการขอบเขตโครงการ (Scope Management)", tags: ["Godot Engine", "GDScript", "Game Jam", "Horror"], links: [ { icon: "fab fa-itch-io", url: "https://bas616.itch.io/haunted-hole-game-jam" }, { icon: "fab fa-youtube", url: "https://youtu.be/suNZLquZLgM" } ] }, { title: "Project: Memory's Stage", youtubeId: "k3WDd9ohpCg", subtitle: "A Digital Tribute to a Thai National Artist", description: "สร้างหนังสั้นแอนิเมชันแนว Surreal เพื่อเป็นเกียรติแก่ ครูสุวรรณี ชลานุเคราะห์ ศิลปินแห่งชาติ โดยใช้ <b>Godot Engine</b> ผสมผสานสไปรท์ 2D และสภาพแวดล้อม 3D เข้าด้วยกันในซีนเดียวเพื่อสร้างความรู้สึกแบบ One-shot ที่ต่อเนื่อง", learnings: "ทักษะการเล่าเรื่องผ่านภาพ (Visual Storytelling) ใน Game Engine, การควบคุมกล้องและองค์ประกอบต่างๆ แบบ Programmatically, การผสมผสานเทคนิค 2D และ 3D, และการจัดการ Asset จากหลายแหล่งที่มา", tags: ["Godot Engine", "Animation", "3D", "Tribute"], links: [ { icon: "fab fa-github", url: "https://github.com/Bas616/national-artist-tribute-godot" }, { icon: "fab fa-youtube", url: "https://youtu.be/k3WDd9ohpCg" } ] } ], 
+                skills: { "Programming & Development": ["<b>Python:</b> AI/ML, Automation, Flask", "<b>GDScript:</b> Game Logic, UI, Physics", "<b>Java & Kotlin:</b> Android App Concepts", "<b>Web Tech:</b> HTML, CSS, JavaScript"], "Game Development": ["<b>Godot Engine (v3 & v4):</b> 2D/3D Workflow", "<b>Design Focus:</b> First-Person Horror, Atmospheric & Psychological Experience"], "AI & Data Science": ["<b>Generative AI & LLMs:</b> Prompt Engineering, API Integration (Gemini)", "<b>ML Concepts:</b> NLP, Data Preparation", "<b>AI Philosophy:</b> Consciousness, Transhumanism, Data Ethics"], "OS & Tools": ["<b>Linux (CLI):</b> System Management, Shell Scripting", "<b>Android (Advanced):</b> Termux Development Environment", "<b>Version Control:</b> Git & GitHub", "<b>Cloud:</b> Google Cloud (Vertex AI, Kubernetes)"] },
+                activities: [ { title: "รางวัลชนะเลิศ - การแข่งขันออกแบบและสร้างหุ่นยนต์บังคับมือ (2566)", image: "https://lh3.googleusercontent.com/d/1QEx_nbsPixgX87ejlzVUsmxhWQWyUtMH", description: "เข้าร่วมกับทีมในการแข่งขันซึ่งจัดโดย สพม.ขอนแก่น โดยประยุกต์ใช้ความรู้ด้านกลไก, อิเล็กทรอนิกส์, และการควบคุมเบื้องต้นจนได้รับรางวัลชนะเลิศ", learnings: "เรียนรู้การทำงานร่วมกับผู้อื่น, การวางแผน, การแก้ปัญหาภายใต้ความกดดัน, และการนำทฤษฎีมาสู่การปฏิบัติจริง" }, { title: "ผ่านการอบรม MATLAB Campus Tour (2567)", image: "https://lh3.googleusercontent.com/d/1pqqM9vaMKyiYKvcW17EtgjXR_ZRGNjTE", description: "เข้าร่วมอบรมเชิงปฏิบัติการ 3 หลักสูตร (Data Analytics & AI, Image Processing, Predictive Maintenance) ณ คณะวิศวกรรมศาสตร์ ม.ขอนแก่น", learnings: "เข้าใจการประยุกต์ใช้ซอฟต์แวร์ระดับสูงในงานวิจัยและอุตสาหกรรม, ได้เห็นภาพการนำทฤษฎีมาแก้ปัญหาในโลกจริง" }, { title: "นักศึกษาวิชาทหาร (ชั้นปีที่ 3)", image: "https://lh3.googleusercontent.com/d/1A9whPzufTtCnwKF8wIiTJVVvUQrnksRQ", description: "เข้ารับการฝึก ณ ศูนย์การฝึกฯ มณฑลทหารบกที่ 23 ตั้งแต่ปี พ.ศ. 2566 จนถึงปัจจุบัน", learnings: "ฝึกฝนระเบียบวินัยในตนเอง, ความอดทน, และการทำงานเป็นทีมเพื่อบรรลุเป้าหมายร่วมกัน" } ], 
+                certificates: [ { title: "Responsive Web Design", issuer: "freeCodeCamp", img: "https://lh3.googleusercontent.com/d/1gp4bEKDcLkIr_SD7nkx37WEPYO5bYUvz" }, { title: "Python (Basic)", issuer: "HackerRank", img: "https://lh3.googleusercontent.com/d/1ux-_iZALsoP4xxvy7DY8N_Kza9PSmlOH" }, { title: "Prompt Design in Vertex AI", issuer: "Google Cloud", img: "https://lh3.googleusercontent.com/d/1McFYdCS0oR9Xjb-6ndtlgaZ1HW7G3YZh" }, { title: "Manage Kubernetes", issuer: "Google Cloud", img: "https://lh3.googleusercontent.com/d/1BPGamtfBGElItg78fLcTACcWKpLaLz8y" }, { title: "100 Days of Code: Python", issuer: "Udemy", img: "https://lh3.googleusercontent.com/d/1HrTmz9iZNYCQoP8sMRaHK0Hum0Ei484c" }, { title: "Building Gen AI Apps", issuer: "Udemy", img: "https://lh3.googleusercontent.com/d/1PjdEiYUS9_Bwb0zRYEESej30weUlhPvY" }, { title: "International Chemistry Quiz", issuer: "RACI (Distinction)", img: "https://lh3.googleusercontent.com/d/1oVHqYeiy83iqaKavg3q6Telt4OOehZUK" }, { title: "สะเต็มศึกษา", issuer: "รร.แก่นนครวิทยาลัย", img: "https://lh3.googleusercontent.com/d/1v3OTibTfH-lN685cPG6a_Zptn-eirG_a" } ]
+            };
+            
+            const sfx = {
+                click: new Audio('https://taira-komori.net/sound_os2/game01/button02b.mp3'),
+                denied: new Audio('https://taira-komori.net/sound_os2/game01/button04b.mp3'),
+                hover: new Audio('https://taira-komori.net/sound_os2/openclose01/wooden_drawer_O.mp3'),
+                bgm: new Audio('https://taira-komori.net/sound_os2/nature01/storm_coming_l.mp3')
+            };
+            sfx.bgm.loop = true;
+
+            let isSoundOn = false;
+            const playSound = (sound) => {
+                if (isSoundOn) {
+                    sound.currentTime = 0;
+                    sound.play().catch(e => {}); // Ignore errors on rapid plays
+                }
+            };
+
+            const mainContainer = document.getElementById('mainContainer');
+            const navMenu = document.getElementById('navMenu');
+            const hamburger = document.getElementById('hamburger');
+            const soundControl = document.getElementById('soundControl');
+            const mainContent = document.getElementById('mainContent');
+            const cursor = document.querySelector('.cursor');
+
+            const initApp = () => {
+                injectContent();
+                attachEventListeners();
+            };
+
+            const injectContent = () => {
+                const navUl = document.createElement('ul');
+                navMenu.appendChild(navUl);
+                
+                const navItems = [
+                    {id: 'home', text: 'HOME'},
+                    {id: 'profile', text: 'PROFILE'},
+                    {id: 'purpose', text: 'PURPOSE'},
+                    {id: 'projects', text: 'PROJECTS'},
+                    {id: 'skills', text: 'SKILLS'},
+                    {id: 'activities', text: 'ACTIVITIES'},
+                    {id: 'certificates', text: 'CERTIFICATES'},
+                    {id: 'contact', text: 'CONTACT'}
+                ];
+
+                navItems.forEach((item, index) => {
+                    const section = document.createElement('section');
+                    section.id = `section-${item.id}`;
+                    section.className = 'content-section';
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'section-wrapper';
+                    section.appendChild(wrapper);
+                    mainContent.appendChild(section);
+                    
+                    const li = document.createElement('li');
+                    li.style.animationDelay = `${0.1 + index * 0.05}s`;
+                    li.innerHTML = `<a href="#section-${item.id}" class="nav-link"><span class="text-original">[ ${item.text} ]</span><span aria-hidden="true" class="text-glitch-layer">[ ${item.text} ]</span></a>`;
+                    navUl.appendChild(li);
+                });
+                
+                // --- SECTION CONTENT INJECTION ---
+                
+                // Home
+                // [PATCH v2.1] - Replaces the entire innerHTML generation for the Home section
+document.querySelector('#section-home .section-wrapper').innerHTML = `
+    <div style="text-align: center;">
+        
+        <p style="font-family: var(--font-mono); color: var(--text-muted); font-size: 1rem; margin-bottom: 0.5rem; letter-spacing: 2px;">
+            [// SYSTEM_KERNEL: BAS_616 //]
+        </p>
+
+        <h1 class="glitch-text" data-text="Pongsagorn Pongsuwagorn" style="font-size: clamp(1.5rem, 5vw, 2.5rem); color: var(--color-primary); margin-bottom: 1rem;">
+            Pongsagorn Pongsuwagorn
+        </h1>
+
+        <p style="font-size: clamp(1rem, 3vw, 1.5rem); color: var(--text-muted); font-family: var(--font-mono); min-height: 2.5rem;" id="subtitle-text">
+            [ Digital Synthesis Portfolio ]
+        </p>
+
+        <p style="max-width: 65ch; margin: 2rem auto;">
+            แฟ้มสะสมผลงานนี้คือ <span class="highlight" style="color: var(--color-accent);">System Log</span> ของการเดินทาง, คือการทำ <span class="highlight" style="color: var(--color-secondary);">Digital Archaeology</span> เพื่อขุดค้นเศษเสี้ยวของความทรงจำ, และคือความพยายามในการ <span class="highlight" style="color: var(--color-primary);">สังเคราะห์</span> ตัวตน... ผ่านศาสตร์แห่ง <span class="highlight">ปัญญาประดิษฐ์</span>, <span class="highlight">การพัฒนาเกม</span>, และ <span class="highlight">ปรัชญาของเทคโนโลยี</span>
+        </p>
+        
+        <div class="dialogue-section" style="text-align: left; max-width: 65ch; margin: 3rem auto; background: none; border-left-color: var(--color-secondary);">
+            <blockquote class="dialogue" style="animation: none;">
+                <p style="font-family: 'Onryou', 'Noto Sans Thai', serif; font-size: 1.4rem; color: var(--color-secondary); text-shadow: 0 0 8px var(--color-secondary);">
+                    "ข้อบกพร่องที่ลึกซึ้งที่สุดของระบบ... มักจะกลายเป็นคุณสมบัติที่นิยามตัวตนของมันได้ดีที่สุด"
+                </p>
+                <footer style="font-family: var(--font-mono); color: var(--text-dark);">
+                    [System Log Entry: AXIOM-01]
+                </footer>
+            </blockquote>
+        </div>
+
+    </div>`;
+
+                // Profile
+                document.querySelector('#section-profile .section-wrapper').innerHTML = `
+                    <h2 data-text="PROFILE">PROFILE // <span>ประวัติส่วนตัว</span></h2>
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; max-width: 800px; margin: auto;">
+                        <div style="text-align:center;"><img src="${portfolioData.profile.image}" alt="Profile Picture" style="width: 180px; height: 180px; border-radius: 50%; border: 3px solid var(--color-accent); box-shadow: 0 0 15px var(--color-accent);"></div>
+                        <div>
+                             <p style="font-size:1.1rem; text-align: left;"><b>ชื่อ:</b> ${portfolioData.profile.name} (${portfolioData.profile.nickname})</p>
+                             <p style="text-align: left;"><b>วันเกิด:</b> ${portfolioData.profile.dob} (อายุ ${portfolioData.profile.age}) | <b>สถานะ:</b> ${portfolioData.profile.rotc}</p>
+<div class="dialogue-section" style="margin: 1rem 0; padding:1.5rem; background: linear-gradient(135deg, rgba(255, 199, 125, 0.05), rgba(255, 199, 125, 0)); border-left-color: var(--color-accent);">
+...<blockquote class="dialogue" style="animation: none; font-size: 1.1rem; line-height: 1.8; color:var(--text-muted); text-shadow:none; font-family:var(--font-main);"><p><i>“${portfolioData.profile.quote}”</i></p></blockquote></div>
+                        </div>
+                    </div>`;
+
+                // Purpose
+                document.querySelector('#section-purpose .section-wrapper').innerHTML = `<h2 data-text="PURPOSE">STATEMENT OF PURPOSE // <span>เป้าหมาย</span></h2>${portfolioData.purpose}`;
+                
+                // Projects
+                const projectsGrid = document.createElement('div');
+projectsGrid.className = 'project-grid';
+portfolioData.projects.forEach(p => {
+    const linksHTML = p.links.map(l => `<a href="${l.url}" target="_blank"><i class="${l.icon}"></i> ${l.icon.split(' ')[1].replace('fa-', '')}</a>`).join('');
+    const tagsHTML = p.tags.map(t => `<span class="tech-tag">${t}</span>`).join('');
+    let mediaHTML = '';
+    if (p.youtubeId) {
+        // [PATCH 4.1] Switched to the privacy-enhanced domain for better compatibility.
+        mediaHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${p.youtubeId}" title="${p.title}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
+    } else {
+        mediaHTML = `<img src="${p.image}" class="project-image" alt="${p.title} preview" loading="lazy">`;
+    }
+
+    projectsGrid.innerHTML += `
+        <div class="project-card">
+            <div class="project-image-wrapper">
+                ${mediaHTML}
+            </div>
+            <div class="project-content">
+                <div class="description-block">
+                    <h3>${p.title}</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9em; margin-top: -1rem;">${p.subtitle}</p>
+                    <p style="font-size: 0.95em;">${p.description}</p>
+                    <p style="font-size: 0.9em; border-left: 2px solid var(--color-success); padding-left: 1em; background: rgba(85,255,136,0.05);"><b>[Learnings]:</b> ${p.learnings}</p>
+                </div>
+                <div>${tagsHTML}</div>
+                <div class="project-links" style="margin-top: 1rem;">${linksHTML}</div>
+            </div>
+        </div>`;
+});
+                const projectsSection = document.querySelector('#section-projects .section-wrapper');
+                projectsSection.innerHTML = `<h2 data-text="PROJECTS">PROJECTS & INNOVATIONS // <span>โครงการ</span></h2>`; projectsSection.appendChild(projectsGrid);
+                
+                // Skills
+                const skillsSection = document.querySelector('#section-skills .section-wrapper'); let skillsHTML = `<h2 data-text="SKILLS">TECHNICAL SKILLS // <span>ทักษะ</span></h2><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">`; for (const category in portfolioData.skills) { skillsHTML += `<div><h3>${category}</h3><ul style="list-style: none; padding: 0;">`; portfolioData.skills[category].forEach(skill => { skillsHTML += `<li style="padding-left: 1.5rem; position: relative;"><span style="position: absolute; left: 0; color: var(--color-success);">&gt;</span>${skill}</li>`; }); skillsHTML += `</ul></div>`; } skillsHTML += `</div>`; skillsSection.innerHTML = skillsHTML;
+                
+                // Activities
+                const activitiesContainer = document.querySelector('#section-activities .section-wrapper'); activitiesContainer.innerHTML = `<h2 data-text="ACTIVITIES">ACTIVITIES & HONORS // <span>กิจกรรม</span></h2><div class="project-grid" style="grid-template-columns: 1fr;">`; portfolioData.activities.forEach(a => { activitiesContainer.innerHTML += `<div class="project-card activity-card"><div class="project-image-wrapper"><img src="${a.image}" class="project-image" alt="${a.title}" loading="lazy"></div><div class="project-content"><h3>${a.title}</h3><p style="font-size: 0.9em;">${a.description}</p><p style="font-size: 0.9em; border-left: 2px solid var(--color-success); padding-left: 1em; background: rgba(85,255,136,0.05);"><b>[Learnings]:</b> ${a.learnings}</p></div></div>`; }); activitiesContainer.innerHTML += `</div>`;
+                
+                // Certificates
+                const certsContainer = document.querySelector('#section-certificates .section-wrapper'); let certsHTML = `<h2 data-text="CERTIFICATES">CERTIFICATES // <span>เกียรติบัตร</span></h2><p style="text-align:center; color: var(--text-muted); font-size:1rem;">นี่คือส่วนหนึ่งของการรับรองทักษะและความมุ่งมั่นในการเรียนรู้ด้วยตนเองอย่างต่อเนื่องของผมครับ</p><div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-top:2rem;">`; portfolioData.certificates.forEach(c => { certsHTML += `<div class="project-card cert-card"><div class="project-image-wrapper"><img src="${c.img}" class="project-image" alt="${c.title}" loading="lazy"></div><div class="project-content" style="padding: 1rem; text-align: center;"><p style="font-weight: 700; font-size: 0.9rem; margin:0;">${c.title}</p><p style="font-weight: 400; font-size: 0.8rem; margin:0; color: var(--text-muted);">${c.issuer}</p></div></div>`; }); certsHTML += `</div>`; certsContainer.innerHTML = certsHTML;
+
+                // Contact
+                const contactSection = document.querySelector('#section-contact .section-wrapper');
+                let contactHTML = `<h2 data-text="CONTACT">CONTACT // <span>ติดต่อ</span></h2><div style="text-align: center; max-width: 700px; margin: 2rem auto;">`;
+                contactHTML += `<img src="https://lh3.googleusercontent.com/d/1qa4MNR-2Am4SVgtYiZjihOVtuZHZxkUY" alt="GitHub QR Code" style="background: white; padding: 10px; border-radius: 8px; max-width: 180px; margin: auto;">`
+                contactHTML += `<p style="font-family: var(--font-mono); color: var(--text-muted); margin-top: 1rem;">github.com/Bas616</p>`;
+                contactHTML += `<div style="display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 2rem; text-align: left; md:grid-template-columns: 1fr 1fr;">`;
+                portfolioData.profile.contact.forEach(item => { contactHTML += `<a href="${item.url || '#'}" target="_blank" class="contact-link" style="text-decoration:none; color: var(--text-base); transition: var(--transition-fast); display: flex; align-items: center; padding: 0.5rem; border-radius: 4px;"><i class="${item.icon} fa-fw" style="color:var(--color-primary); margin-right: 0.75rem; width:20px;"></i>${item.text}</a>`; });
+                contactHTML += `</div></div>`;
+                contactSection.innerHTML = contactHTML;
+            };
+
+            const attachEventListeners = () => {
+                const modal = document.getElementById('modal');
+                const btnYes = document.getElementById('btnYes');
+                const btnNo = document.getElementById('btnNo');
+                
+                const initialize = (playSound) => {
+                    document.body.style.overflow = "visible";
+                    isSoundOn = playSound;
+                    modal.style.opacity = '0';
+                    modal.style.pointerEvents = 'none';
+                    if (isSoundOn) { sfx.bgm.volume = 0.1; sfx.bgm.play().catch(e => {}); soundControl.textContent = 'SOUND: ON'; soundControl.classList.remove('muted'); document.getElementById('favicon').setAttribute('href', "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👁️</text></svg>");
+                    } else { soundControl.textContent = 'SOUND: OFF'; soundControl.classList.add('muted'); }
+                    mainContainer.style.opacity = '1';
+                    mainContainer.style.pointerEvents = 'auto';
+                    setTimeout(() => { modal.style.display = 'none'; }, 500);
+                };
+
+                btnYes.addEventListener('click', () => { playSound(sfx.click); initialize(true); });
+                btnNo.addEventListener('click', () => {
+                    playSound(sfx.denied);
+                    const modalPs = modal.querySelectorAll('p');
+                    modalPs.forEach(p => p.style.transition = 'opacity 0.3s');
+                    modalPs.forEach(p => p.style.opacity = '0');
+                    setTimeout(() => {
+                         const p = modalPs[0]; // Reuse first p element
+                         p.style.fontFamily = "'Onryou', 'Noto Sans Thai', serif";
+                         p.style.color = '#ff003c';
+                         p.style.lineHeight = '1.6';
+                         p.innerHTML = "SYSTEM STANDBY.<br>REASON: USER DECLINED INTERACTION.";
+                         p.style.opacity = '1';
+                         modal.querySelectorAll('p')[1].remove();
+                         modal.querySelectorAll('p')[1].remove();
+                    }, 300);
+                   
+                    modal.querySelector('.modal-buttons').style.display = 'none';
+                    document.getElementById('favicon').setAttribute('href', "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛔</text></svg>");
+                    setTimeout(() => initialize(false), 2000);
+                });
+
+                window.addEventListener('mousemove', e => { cursor.style.left = e.pageX + 'px'; cursor.style.top = e.pageY + 'px'; });
+                document.body.addEventListener('mousedown', () => cursor.classList.add('click'));
+                document.body.addEventListener('mouseup', () => cursor.classList.remove('click'));
+
+                hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navMenu.classList.toggle('active'); playSound(sfx.click); });
+
+                navMenu.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('mouseenter', () => playSound(sfx.hover));
+                    link.addEventListener('click', (e) => { 
+                        e.preventDefault();
+                        const targetElement = document.querySelector(link.getAttribute('href'));
+                        if (targetElement) { targetElement.scrollIntoView({ behavior: 'smooth' }); }
+                        hamburger.classList.remove('active'); navMenu.classList.remove('active'); playSound(sfx.click); 
+                    });
+                });
+                
+                document.body.addEventListener('mouseenter', () => playSound(sfx.hover));
+                document.querySelectorAll('a, button, .project-card').forEach(el => el.addEventListener('mouseenter', () => playSound(sfx.hover)));
+
+                soundControl.addEventListener('click', () => {
+                    isSoundOn = !isSoundOn;
+                    if (isSoundOn) { sfx.bgm.play().catch(e => {}); soundControl.textContent = 'SOUND: ON'; soundControl.classList.remove('muted'); playSound(sfx.click); } 
+                    else { sfx.bgm.pause(); soundControl.textContent = 'SOUND: OFF'; soundControl.classList.add('muted'); }
+                });
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.querySelector('.section-wrapper').classList.add('is-visible'); }});
+                }, { threshold: 0.15 });
+                document.querySelectorAll('.content-section').forEach(el => observer.observe(el));
+            };
+
+            initApp();
+        });
+    </script>
+</body>
+</html>
