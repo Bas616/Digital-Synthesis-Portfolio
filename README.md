@@ -6,8 +6,8 @@
 [![Languages](https://img.shields.io/github/languages/top/Bas616/Digital-Synthesis-Portfolio?style=for-the-badge&color=c77dff)](https://github.com/Bas616/Digital-Synthesis-Portfolio)
 [![Status](https://img.shields.io/static/v1?label=status&message=dynamic-archive&color=ffc77d&style=for-the-badge)](https://github.com/Bas616)
 
-![Portfolio Showcase GIF](https://drive.google.com/thumbnail?id=1tBmUJLT2Tckl0cZ2idjXSNUWOU4SYxFM) 
-_Note: The live version features interactive sounds and animations._
+![Portfolio Showcase GIF](https://drive.google.com/thumbnail?id=1tBmUJLT2Tckl0cZ2idjXSNUWOU4SYxFM)
+Note: The live version features interactive sounds and animations._
 
 ---
 
