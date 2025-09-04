@@ -26,15 +26,15 @@ This project is a self-contained **vanilla web application**, built with a focus
 
 ### Architectural Highlights:
 *   **Single-Page Application (SPA):** The entire portfolio exists within a single `index.html` file, with JavaScript dynamically injecting content into section templates. This ensures rapid loading and seamless navigation.
-*   **Modular Data Structure:** All portfolio content (personal info, project details, skills, etc.) is stored within a single structured JavaScript object (`portfolioData`). This decouples the data from the presentation layer, making updates efficient and systematic.
-*   **CSS-Driven Thematics:** A comprehensive set of CSS variables (`:root`) defines a cohesive aesthetic matrix (colors, fonts, transitions), allowing for easy thematic changes and ensuring a consistent visual identity.
+*   **Modular Data Structure:** All portfolio content is stored within a single structured JavaScript object (`portfolioData`). This decouples the data from the presentation layer, making updates efficient and systematic.
+*   **CSS-Driven Thematics:** A comprehensive set of CSS variables (`:root`) defines a cohesive aesthetic matrix (colors, fonts, transitions), allowing for easy thematic changes.
 
 ### Key Features:
 *   **Immersive Ambience:** A multi-layered visual system combines a background image, animated scanlines, digital noise, and a vignette to create a retro-futuristic, "haunted terminal" atmosphere.
-*   **Interactive Soundscape:** User actions such as clicks, hovers, and menu interactions trigger corresponding sound effects, while an ambient background track sets the mood. This functionality is opt-in, respecting the user's preferences.
-*   **Dynamic Glitch & Text Effects:** Utilizes CSS animations (`@keyframes`) and JavaScript to generate procedural glitch effects on titles and other key text elements, enhancing the digital, sometimes unstable, theme.
-*   **Responsive Design:** The layout adapts fluidly from desktop to mobile viewports, ensuring a consistent and accessible experience across all devices.
-*   **Performance-Optimized:** All assets are preloaded, and content is injected dynamically after the initial page load to ensure a fast and smooth user experience. Lazy loading is implemented for images to optimize initial load times.
+*   **Interactive Soundscape:** User actions such as clicks, hovers, and menu interactions trigger corresponding sound effects, with an optional ambient background track.
+*   **Dynamic Glitch & Text Effects:** Utilizes CSS animations (`@keyframes`) and JavaScript to generate procedural glitch effects, enhancing the digital, sometimes unstable, theme.
+*   **Responsive Design:** The layout adapts fluidly from desktop to mobile viewports for a consistent experience.
+*   **Performance-Optimized:** Assets are preloaded and content is injected dynamically. Lazy loading is implemented for images to optimize initial load times.
 
 ## III. Tech Stack
 
@@ -42,25 +42,23 @@ This project deliberately avoids external frameworks to demonstrate proficiency 
 
 *   **Languages:** ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 *   **Fonts:**
-    *   **Google Fonts:** `IBM Plex Mono` & `Noto Sans Thai` for primary text.
-    *   **Custom Fonts:** `Onryou` & `IPAM` (loaded via `@font-face`) for specialized, thematic text.
+    *   **Google Fonts:** `IBM Plex Mono` & `Noto Sans Thai`
+    *   **Custom Fonts:** `Onryou` & `IPAM` (loaded via `@font-face`)
 *   **Tools & Libraries:**
     *   **Font Awesome:** For scalable vector icons.
 *   **Hosting:**
-    *   **GitHub Pages:** The portfolio is hosted directly from this repository.
+    *   **GitHub Pages**
 
 ## IV. Setup & Deployment
-
-Since this is a self-contained project, deployment is straightforward.
 
 1.  **Clone the Repository:**
     ```bash
     git clone https://github.com/Bas616/Digital-Synthesis-Portfolio.git
     ```
 2.  **Open in Browser:**
-    Navigate to the cloned directory and open the `index.html` file directly in any modern web browser.
-3.  **GitHub Pages Deployment:**
-    This repository is configured to deploy automatically via GitHub Pages. Any push to the `main` branch will trigger a new build and update the live site at `https://bas616.github.io/Digital-Synthesis-Portfolio/`.
+    Navigate to the cloned directory and open `index.html` directly in any modern web browser.
+3.  **Deployment:**
+    This repository is configured to deploy automatically via GitHub Pages. Any push to the `main` branch will update the live site.
 
 ---
 _This portfolio is a dynamic entity and will continue to evolve alongside my projects and skills._
